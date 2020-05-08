@@ -1,0 +1,58 @@
+<div>
+  <p-toast></p-toast>
+  <p-dataView
+    [value]="noticias"
+    [paginator]="true"
+    [rows]="20"
+    [lazy]="true"
+    (onLazyLoad)="loadData($event)"
+    [totalRecords]="totalRecords"
+    layout="grid"
+  >
+    <!-- <ng-template class="itens" let-noticia pTemplate="listItem">
+      <div>
+        {{ noticia.id }}
+      </div>
+    </ng-template> -->
+    <ng-template let-noticia pTemplate="gridItem">
+      <div class="base ui-g-12 ui-md-3">
+        <div [className]="confereNoticia(noticia) ? 'valido' : 'invalido'">
+          ID: {{ noticia.id }} - TITULO: {{ noticia.titulo }}
+        </div>
+        <div>
+          FONTE: <a href="{{ noticia.fonte.link }}">{{ noticia.fonte.nome }}</a>
+        </div>
+        <div class="link">
+          LINK: <a href="{{ noticia.link }}">{{ noticia.link }}</a>
+        </div>
+        <div class="mybadge" *ngIf="noticia.descValid">
+          <span
+            *ngFor="let descritor of noticia.descValid"
+            class="new badge"
+            data-badge-caption=""
+            >{{ descritor }}</span
+          >
+        </div>
+
+        <!-- <div class="conteudo">CONTEUDO: {{ noticia.conteudo }}</div> -->
+        <div
+          *ngIf="noticia.excluida == undefined"
+          (click)="excluir(noticia)"
+          class="botao"
+        >
+          <a class="waves-effect waves-light btn red">excluir</a>
+        </div>
+      </div>
+    </ng-template>
+  </p-dataView>
+</div>
+<!-- <ul class="collection">
+  <li *ngFor="let noticia of noticias" class="collection-item avatar">
+    <div>
+      <span class="title h3">{{ noticia.id }} - {{ noticia.titulo }} </span>
+      <p>{{ noticia.conteudo }}</p>
+
+      <a class="waves-effect waves-light btn-small">excluir</a>
+    </div>
+  </li>
+</ul> -->
