@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NoticiaService } from './services/noticia.service';
 import { MessageService } from 'primeng/api';
+import { Noticia } from './models/noticia.model';
 
 @Component({
   selector: 'app-noticia',
@@ -12,6 +13,7 @@ export class NoticiaComponent implements OnInit {
   noticias: any[];
   totalRecords: number;
   pagina = 1;
+  rows = 20;
   descritores = [
     'mariana',
     'barragem',
@@ -29,9 +31,23 @@ export class NoticiaComponent implements OnInit {
 
   ngOnInit() {}
   loadData(event) {
-    this.pagina = event.first == 0 ? 1 : 1 + event.first / event.rows;
-    this.service.getNoticias(this.pagina, event.rows).subscribe((n) => {
-      this.noticias = n.noticias;
+    this.pagina = event.first == 0 ? 1 : 1 + event.first / this.rows;
+    this.service.getNoticias(this.pagina, this.rows).subscribe((n) => {
+      this.noticias = n.noticias.map((no: Noticia) => {
+        no.excluida = false;
+        return no;
+      });
+      this.totalRecords = n.totalNoticias;
+    });
+  }
+  reload() {
+    console.log('reloaded');
+
+    this.service.getNoticias(this.pagina, this.rows).subscribe((n) => {
+      this.noticias = n.noticias.map((no: Noticia) => {
+        no.excluida = false;
+        return no;
+      });
       this.totalRecords = n.totalNoticias;
     });
   }
@@ -56,19 +72,41 @@ export class NoticiaComponent implements OnInit {
     return noticia.descValid == undefined ? false : true;
   }
   excluir(noticia) {
-    this.messageService.add({
-      severity: 'success',
-      summary: 'Service Message',
-      detail: 'Via MessageService',
+    this.service.deleteNoticias(noticia).subscribe((n) => {
+      console.log(n);
+      if (n === null) {
+        this.messageService.add({
+          severity: 'sucess',
+          summary: 'Sucesso!',
+          detail: 'Noticia Recadastrada',
+        });
+        noticia.excluida = !noticia.excluida;
+      } else {
+        this.messageService.add({
+          severity: 'warn',
+          summary: 'Erro!',
+          detail: 'A ação falhou',
+        });
+      }
     });
-    noticia.excluida = true;
   }
   desfazer(noticia) {
-    this.messageService.add({
-      severity: 'success',
-      summary: 'Service Message',
-      detail: 'Via MessageService',
+    this.service.postNoticias(noticia).subscribe((n) => {
+      console.log(n);
+      if (n === null) {
+        this.messageService.add({
+          severity: 'sucess',
+          summary: 'Sucesso!',
+          detail: 'Noticia Recadastrada',
+        });
+        noticia.excluida = !noticia.excluida;
+      } else {
+        this.messageService.add({
+          severity: 'warn',
+          summary: 'Erro!',
+          detail: 'A ação falhou',
+        });
+      }
     });
-    noticia.excluida = false;
   }
 }

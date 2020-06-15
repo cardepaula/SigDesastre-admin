@@ -4,9 +4,9 @@ import { RssComponent } from './rss/rss.component';
 import { NoticiaComponent } from './noticia/noticia.component';
 
 const routes: Routes = [
-  { path: 'rss', component: RssComponent },
-  { path: 'noticia', component: NoticiaComponent },
-  { path: '', redirectTo: '/rss', pathMatch: 'full' }, // redirect to `first-component`
+  { path: 'front-rss', component: RssComponent },
+  { path: 'front-noticia', component: NoticiaComponent },
+  { path: '', redirectTo: '/front-rss', pathMatch: 'full' }, // redirect to `first-component`
 ];
 
 @NgModule({

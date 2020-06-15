@@ -21,4 +21,10 @@ export class NoticiaService {
       `${this.url}?pagina=${pagina}&qtdNoticias=${quantidade}`
     );
   }
+  deleteNoticias(noticia: Noticia) {
+    return this.http.delete(`${this.url}/id/${noticia.id}`);
+  }
+  postNoticias(noticia: Noticia) {
+    return this.http.post(`${this.url}`, noticia, this.httpOptions);
+  }
 }

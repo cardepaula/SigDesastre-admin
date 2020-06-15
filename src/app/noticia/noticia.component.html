@@ -1,5 +1,13 @@
+<div><h4>Noticias:</h4></div>
+<!-- Botão de criar Noticia -->
+<div class="fixed-action-btn">
+  <a class="btn-floating btn-large red modal-trigger" href="#modalNoticia">
+    <i class="large material-icons">add</i>
+  </a>
+</div>
+<!-- Botão de criar Noticia -->
 <div>
-  <div class="progress">
+  <div *ngIf="!noticias" class="progress">
     <div class="indeterminate"></div>
   </div>
   <p-toast></p-toast>
@@ -33,22 +41,27 @@
         </div>
 
         <!-- <div class="conteudo">CONTEUDO: {{ noticia.conteudo }}</div> -->
-        <div
-          *ngIf="noticia.excluida == undefined"
-          (click)="excluir(noticia)"
-          class="botao"
-        >
+        <div *ngIf="!noticia.excluida" (click)="excluir(noticia)" class="botao">
           <a class="waves-effect waves-light btn red">excluir</a>
         </div>
 
-        <div
-          *ngIf="!noticia.excluida"
-          (click)="desfazer(noticia)"
-          class="botao"
-        >
+        <div *ngIf="noticia.excluida" (click)="desfazer(noticia)" class="botao">
           <a class="waves-effect waves-light btn green">desfazer</a>
         </div>
       </div>
     </ng-template>
   </p-dataView>
 </div>
+<!-- Modal Structure -->
+<div id="modalNoticia" class="modal">
+  <div class="modal-content">
+    <h4>Criar um nova Noticia</h4>
+    <app-form-noticia></app-form-noticia>
+  </div>
+  <div class="modal-footer">
+    <a (click)="reload()" class="modal-close waves-effect waves-green btn-flat"
+      >cancelar</a
+    >
+  </div>
+</div>
+<!-- Modal Structure -->

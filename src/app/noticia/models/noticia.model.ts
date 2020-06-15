@@ -1,5 +1,6 @@
 export class Noticia {
-  id: number;
+  id?: number;
   nome: string;
   url: string;
+  excluida?: boolean;
 }
