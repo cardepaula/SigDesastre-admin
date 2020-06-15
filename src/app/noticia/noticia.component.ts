@@ -6,7 +6,7 @@ import { MessageService } from 'primeng/api';
   selector: 'app-noticia',
   templateUrl: './noticia.component.html',
   styleUrls: ['./noticia.component.css'],
-  providers: [MessageService],
+  providers: [MessageService, NoticiaService],
 })
 export class NoticiaComponent implements OnInit {
   noticias: any[];
@@ -50,7 +50,6 @@ export class NoticiaComponent implements OnInit {
             : noticia.descValid.push(descritor);
         }
       });
-      console.log('rodou');
 
       return noticia.descValid == undefined ? false : true;
     }
@@ -63,5 +62,13 @@ export class NoticiaComponent implements OnInit {
       detail: 'Via MessageService',
     });
     noticia.excluida = true;
+  }
+  desfazer(noticia) {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Service Message',
+      detail: 'Via MessageService',
+    });
+    noticia.excluida = false;
   }
 }

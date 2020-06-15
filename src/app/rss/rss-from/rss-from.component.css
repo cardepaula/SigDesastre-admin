@@ -1,0 +1,5 @@
+.conteudo {
+  display: flex;
+  justify-self: flex-start;
+  margin: 1 auto;
+}

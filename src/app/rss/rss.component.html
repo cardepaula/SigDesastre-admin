@@ -1,0 +1,56 @@
+<!-- Botão de criar RSS -->
+<div class="fixed-action-btn">
+  <a class="btn-floating btn-large red modal-trigger" href="#modal1">
+    <i class="large material-icons">add</i>
+  </a>
+</div>
+<!-- Botão de criar RSS -->
+<!-- show Data -->
+<div>
+  <div *ngIf="!rss" class="progress">
+    <div class="indeterminate"></div>
+  </div>
+  <p-toast></p-toast>
+  <p-dataView
+    [value]="rss"
+    [paginator]="true"
+    [rows]="20"
+    [lazy]="true"
+    (onLazyLoad)="loadData()"
+    [totalRecords]="totalRecords"
+    layout="grid"
+  >
+    <ng-template let-rss pTemplate="gridItem">
+      <div class="base ui-g-12 ui-md-3">
+        <div>ID: {{ rss.id }} - TITULO: {{ rss.nome }}</div>
+        <div>
+          Link: <a href="{{ rss.url }}">{{ rss.url }}</a>
+        </div>
+
+        <div *ngIf="!rss.excluido" (click)="excluir(rss)" class="botao">
+          <a class="waves-effect waves-light btn-small red">excluir</a>
+        </div>
+
+        <div *ngIf="rss.excluido" (click)="desfazer(rss)" class="botao">
+          <a class="waves-effect waves-light btn-small green">desfazer</a>
+        </div>
+      </div>
+    </ng-template>
+  </p-dataView>
+</div>
+<!-- show Data -->
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <h4>Criar um novo RSS</h4>
+    <app-rss-from></app-rss-from>
+  </div>
+  <div class="modal-footer">
+    <a
+      (click)="loadData()"
+      class="modal-close waves-effect waves-green btn-flat"
+      >cancelar</a
+    >
+  </div>
+</div>
+<!-- Modal Structure -->

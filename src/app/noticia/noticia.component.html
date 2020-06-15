@@ -1,4 +1,7 @@
 <div>
+  <div class="progress">
+    <div class="indeterminate"></div>
+  </div>
   <p-toast></p-toast>
   <p-dataView
     [value]="noticias"
@@ -9,11 +12,6 @@
     [totalRecords]="totalRecords"
     layout="grid"
   >
-    <!-- <ng-template class="itens" let-noticia pTemplate="listItem">
-      <div>
-        {{ noticia.id }}
-      </div>
-    </ng-template> -->
     <ng-template let-noticia pTemplate="gridItem">
       <div class="base ui-g-12 ui-md-3">
         <div [className]="confereNoticia(noticia) ? 'valido' : 'invalido'">
@@ -42,17 +40,15 @@
         >
           <a class="waves-effect waves-light btn red">excluir</a>
         </div>
+
+        <div
+          *ngIf="!noticia.excluida"
+          (click)="desfazer(noticia)"
+          class="botao"
+        >
+          <a class="waves-effect waves-light btn green">desfazer</a>
+        </div>
       </div>
     </ng-template>
   </p-dataView>
 </div>
-<!-- <ul class="collection">
-  <li *ngFor="let noticia of noticias" class="collection-item avatar">
-    <div>
-      <span class="title h3">{{ noticia.id }} - {{ noticia.titulo }} </span>
-      <p>{{ noticia.conteudo }}</p>
-
-      <a class="waves-effect waves-light btn-small">excluir</a>
-    </div>
-  </li>
-</ul> -->

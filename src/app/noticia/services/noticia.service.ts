@@ -6,7 +6,7 @@ import { Noticia } from '../models/noticia.model';
   providedIn: 'root',
 })
 export class NoticiaService {
-  url: string = 'http://localhost:3000/noticias'; //'https://sigdesastre.herokuapp.com/noticias';
+  url: string = 'https://sigdesastre.herokuapp.com/noticias'; //'http://localhost:3000/noticias'; //
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
