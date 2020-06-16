@@ -11,12 +11,17 @@ import { Rss } from './models/rss.model';
 export class RssComponent implements OnInit {
   totalRecords: number;
   rss: Rss[];
+  displayModal: boolean = false;
   constructor(
     private messageService: MessageService,
     private rssService: RssService
   ) {}
 
   ngOnInit(): void {}
+
+  showDialog() {
+    this.displayModal = true;
+  }
 
   loadData() {
     this.rssService.getRss().subscribe((n) => {
@@ -30,11 +35,51 @@ export class RssComponent implements OnInit {
     });
   }
   desfazer(rss: Rss) {
-    rss.excluido = !rss.excluido;
-    this.rssService.postRss(rss).subscribe((r) => console.log(r));
+    let acao = 'Recadastro';
+
+    this.rssService.postRss(rss).subscribe(
+      (next) => {
+        console.log(next);
+        this.callMensageSuccess(acao);
+        rss.excluido = !rss.excluido;
+      },
+      (error) => {
+        this.callMensageErro(acao);
+        console.log(error);
+      }
+    );
   }
   excluir(rss: Rss) {
-    rss.excluido = !rss.excluido;
-    this.rssService.deleteRss(rss).subscribe((r) => console.log(r));
+    let acao = 'Excluir';
+    this.rssService.deleteRss(rss).subscribe(
+      (next) => {
+        this.callMensageSuccess(acao);
+        console.log(next);
+        rss.excluido = !rss.excluido;
+      },
+      (error) => {
+        this.callMensageErro(acao);
+        console.log(error);
+      }
+    );
+  }
+  callMensageErro(action) {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Erro!',
+      detail: `${action} Falhou!`,
+    });
+  }
+  callMensageSuccess(action) {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Sucesso!',
+      detail: `${action} com sucesso!`,
+    });
+  }
+
+  reload() {
+    this.displayModal = false;
+    this.loadData();
   }
 }

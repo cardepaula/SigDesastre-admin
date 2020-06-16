@@ -12,9 +12,11 @@ import { ToastModule } from 'primeng/toast';
 import { RssModule } from './rss/rss.module';
 import { NoticiaModule } from './noticia/noticia.module';
 import { RssComponent } from './rss/rss.component';
+import { DialogModule } from 'primeng/dialog';
 @NgModule({
   declarations: [AppComponent, NoticiaComponent, RssComponent],
   imports: [
+    DialogModule,
     NoticiaModule,
     RssModule,
     ToastModule,

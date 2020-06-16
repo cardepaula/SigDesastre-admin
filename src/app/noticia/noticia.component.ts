@@ -14,6 +14,7 @@ export class NoticiaComponent implements OnInit {
   totalRecords: number;
   pagina = 1;
   rows = 20;
+  displayModal: boolean = false;
   descritores = [
     'mariana',
     'barragem',
@@ -29,6 +30,10 @@ export class NoticiaComponent implements OnInit {
     private messageService: MessageService
   ) {}
 
+  showDialog() {
+    this.displayModal = true;
+  }
+
   ngOnInit() {}
   loadData(event) {
     this.pagina = event.first == 0 ? 1 : 1 + event.first / this.rows;
@@ -42,7 +47,7 @@ export class NoticiaComponent implements OnInit {
   }
   reload() {
     console.log('reloaded');
-
+    this.displayModal = false;
     this.service.getNoticias(this.pagina, this.rows).subscribe((n) => {
       this.noticias = n.noticias.map((no: Noticia) => {
         no.excluida = false;
@@ -72,41 +77,45 @@ export class NoticiaComponent implements OnInit {
     return noticia.descValid == undefined ? false : true;
   }
   excluir(noticia) {
-    this.service.deleteNoticias(noticia).subscribe((n) => {
-      console.log(n);
-      if (n === null) {
-        this.messageService.add({
-          severity: 'sucess',
-          summary: 'Sucesso!',
-          detail: 'Noticia Recadastrada',
-        });
+    let acao = 'Excluir';
+    this.service.deleteNoticias(noticia).subscribe(
+      (next) => {
+        console.log(next);
         noticia.excluida = !noticia.excluida;
-      } else {
-        this.messageService.add({
-          severity: 'warn',
-          summary: 'Erro!',
-          detail: 'A ação falhou',
-        });
+        this.callMensageSuccess(acao);
+      },
+      (error) => {
+        console.log(error);
+        this.callMensageErro(acao);
       }
-    });
+    );
   }
   desfazer(noticia) {
-    this.service.postNoticias(noticia).subscribe((n) => {
-      console.log(n);
-      if (n === null) {
-        this.messageService.add({
-          severity: 'sucess',
-          summary: 'Sucesso!',
-          detail: 'Noticia Recadastrada',
-        });
+    let acao = 'Recadastro';
+    this.service.postNoticias(noticia).subscribe(
+      (next) => {
+        console.log(next);
+        this.callMensageSuccess(acao);
         noticia.excluida = !noticia.excluida;
-      } else {
-        this.messageService.add({
-          severity: 'warn',
-          summary: 'Erro!',
-          detail: 'A ação falhou',
-        });
+      },
+      (error) => {
+        console.log(error);
+        this.callMensageErro(acao);
       }
+    );
+  }
+  callMensageErro(action) {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Erro!',
+      detail: `${action} Falhou!`,
+    });
+  }
+  callMensageSuccess(action) {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Sucesso!',
+      detail: `${action} com sucesso!`,
     });
   }
 }

@@ -3,3 +3,6 @@
   justify-self: flex-start;
   margin: 1 auto;
 }
+.sumir {
+  visibility: hidden;
+}

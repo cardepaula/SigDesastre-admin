@@ -1,21 +1,40 @@
 <form [formGroup]="formRss" (ngSubmit)="onSubmit()">
   <div class="form-group">
-    <label for="nome">Nome</label>
-    <input
-      type="text"
-      class="form-control"
-      name="name"
-      id="nome"
-      formControlName="nome"
-    />
-    <label for="url">Url</label>
-    <input
-      type="text"
-      class="form-control"
-      name="name"
-      id="url"
-      formControlName="url"
-    />
+    <div>
+      <label for="nome">Nome</label>
+      <input
+        required
+        minlength="3"
+        type="text"
+        class="form-control validate"
+        NgModule
+        name="name"
+        formControlName="nome"
+      />
+      <span class="helper-text" data-error="Errado" data-success="Correto"
+        >minimo 3 letras</span
+      >
+    </div>
+    <div>
+      <label for="url">Url</label>
+      <input
+        required
+        minlength="4"
+        type="text"
+        NgModule
+        class="form-control validate"
+        name="url"
+        formControlName="url"
+      />
+      <span class="helper-text" data-error="Errado" data-success="Correto"
+        >minimo 4 letras</span
+      >
+    </div>
   </div>
-  <input type="submit" class="btn btn-primary mt-4" value="Salvar" />
+  <input
+    type="submit"
+    [class.disabled]="validador()"
+    class="btn btn-primary mt-4"
+    value="Salvar"
+  />
 </form>

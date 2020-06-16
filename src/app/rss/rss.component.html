@@ -3,7 +3,7 @@
 </div>
 <!-- Botão de criar RSS -->
 <div class="fixed-action-btn">
-  <a class="btn-floating btn-large red modal-trigger" href="#modalRss">
+  <a class="btn-floating btn-large red" (click)="showDialog()">
     <i class="large material-icons">add</i>
   </a>
 </div>
@@ -43,7 +43,7 @@
 </div>
 <!-- show Data -->
 <!-- Modal Structure -->
-<div id="modalRss" class="modal">
+<!-- <div id="modalRss" class="modal">
   <div class="modal-content">
     <h4>Criar um novo RSS</h4>
     <app-rss-from></app-rss-from>
@@ -55,5 +55,16 @@
       >cancelar</a
     >
   </div>
-</div>
+</div> -->
 <!-- Modal Structure -->
+<p-dialog [(visible)]="displayModal">
+  <p-header>
+    Criar um novo RSS
+  </p-header>
+  <app-rss-from></app-rss-from>
+  <p-footer>
+    <a (click)="reload()" class="modal-close waves-effect waves-green btn-flat"
+      >cancelar</a
+    >
+  </p-footer>
+</p-dialog>

@@ -1,7 +1,7 @@
 <div><h4>Noticias:</h4></div>
 <!-- Botão de criar Noticia -->
 <div class="fixed-action-btn">
-  <a class="btn-floating btn-large red modal-trigger" href="#modalNoticia">
+  <a class="btn-floating btn-large red modal-trigger" (click)="showDialog()">
     <i class="large material-icons">add</i>
   </a>
 </div>
@@ -53,7 +53,7 @@
   </p-dataView>
 </div>
 <!-- Modal Structure -->
-<div id="modalNoticia" class="modal">
+<!-- <div id="modalNoticia" class="modal">
   <div class="modal-content">
     <h4>Criar um nova Noticia</h4>
     <app-form-noticia></app-form-noticia>
@@ -63,5 +63,15 @@
       >cancelar</a
     >
   </div>
-</div>
+</div> -->
 <!-- Modal Structure -->
+<p-dialog [(visible)]="displayModal">
+  <p-header> Criar nova Noticia </p-header>
+  <app-form-noticia></app-form-noticia>
+
+  <p-footer>
+    <a (click)="reload()" class="modal-close waves-effect waves-green btn-flat"
+      >cancelar</a
+    >
+  </p-footer>
+</p-dialog>
