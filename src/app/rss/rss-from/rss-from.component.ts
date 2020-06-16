@@ -33,7 +33,7 @@ export class RssFromComponent {
   // });
 
   onSubmit() {
-    if (this.validador()) {
+    if (!this.validador()) {
       console.log('enviado: ', this.formRss.value);
       this.rssService.postRss(this.formRss.value).subscribe(
         (n) => {
