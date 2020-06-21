@@ -14,9 +14,11 @@ import { NoticiaModule } from './noticia/noticia.module';
 import { RssComponent } from './rss/rss.component';
 import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 @NgModule({
   declarations: [AppComponent, NoticiaComponent, RssComponent],
   imports: [
+    ProgressSpinnerModule,
     DropdownModule,
     DialogModule,
     NoticiaModule,

@@ -40,6 +40,7 @@ export class RssFromComponent implements OnInit {
 
   async onSubmit() {
     if (!this.validador()) {
+      this.lockVar = false;
       let rss: Rss = new Rss();
       rss.nome = this.formRss.value.nome;
       rss.url = this.formRss.value.url;
@@ -55,6 +56,9 @@ export class RssFromComponent implements OnInit {
         (e) => {
           this.callMensageErro('Criar rss');
           console.log('Erro', e);
+        },
+        () => {
+          this.lockVar = true;
         }
       );
     }
@@ -63,7 +67,8 @@ export class RssFromComponent implements OnInit {
     return !(
       this.formRss.value.nome.length >= 1 &&
       this.formRss.value.url.length >= 1 &&
-      this.tipoFonteEscolhido.id
+      this.tipoFonteEscolhido.id &&
+      this.lockVar
     );
   }
 

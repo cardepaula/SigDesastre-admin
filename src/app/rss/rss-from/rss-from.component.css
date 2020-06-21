@@ -2,7 +2,10 @@
   visibility: hidden;
 }
 .base {
-  width: 100%;
+  /*  width: 90%; */
+  height: 370px;
+  max-width: 500px;
+  max-height: 500px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -19,4 +22,24 @@
 .divDrop {
   margin-left: 50px;
   align-content: flex-start;
+}
+.load {
+  display: flex;
+  justify-content: center;
+}
+@keyframes ui-progress-spinner-color {
+  100%,
+  0% {
+    stroke: #d62d20;
+  }
+  40% {
+    stroke: #0057e7;
+  }
+  66% {
+    stroke: #008744;
+  }
+  80%,
+  90% {
+    stroke: #ffa700;
+  }
 }
