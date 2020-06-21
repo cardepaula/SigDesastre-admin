@@ -1,36 +1,64 @@
-<form [formGroup]="formRss" (ngSubmit)="onSubmit()">
+<form
+  [formGroup]="formRss"
+  (ngSubmit)="onSubmit()"
+  class="base"
+  [style]="{ width: '25vw', height: '22vw' }"
+>
   <div class="form-group">
-    <div>
-      <label for="nome">Nome</label>
-      <input
-        required
-        minlength="3"
-        type="text"
-        class="form-control validate"
-        NgModule
-        name="name"
-        formControlName="nome"
-      />
-      <span class="helper-text" data-error="Errado" data-success="Correto"
-        >minimo 3 letras</span
-      >
+    <div class="conteudo">
+      <div class="divNome">
+        <label for="nome">Nome</label>
+        <input
+          required
+          minlength="1"
+          type="text"
+          class="form-control validate"
+          NgModule
+          name="name"
+          formControlName="nome"
+        />
+        <span
+          class="helper-text"
+          data-error="campo obrigatório"
+          data-success="Correto"
+        >
+        </span>
+      </div>
+      <div class="divDrop">
+        <label for="nome">Tipo da Fonte:</label>
+        <div>
+          <p-dropdown
+            [options]="tipoFontelist"
+            [(ngModel)]="tipoFonteEscolhido"
+            NgModule
+            formControlName="tipoFonteId"
+            name="tipoFonteId"
+            class="form-control validate"
+          ></p-dropdown>
+        </div>
+      </div>
     </div>
+    <br />
     <div>
       <label for="url">Url</label>
       <input
         required
-        minlength="4"
+        minlength="1"
         type="text"
         NgModule
         class="form-control validate"
         name="url"
         formControlName="url"
       />
-      <span class="helper-text" data-error="Errado" data-success="Correto"
-        >minimo 4 letras</span
+      <span
+        class="helper-text"
+        data-error="campo obrigatório"
+        data-success="Correto"
       >
+      </span>
     </div>
   </div>
+  <br /><br /><br />
   <input
     type="submit"
     [class.disabled]="validador()"

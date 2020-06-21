@@ -90,11 +90,12 @@ export class NoticiaComponent implements OnInit {
       }
     );
   }
-  desfazer(noticia) {
+  desfazer(noticia: Noticia) {
     let acao = 'Recadastro';
     this.service.postNoticias(noticia).subscribe(
       (next) => {
         console.log(next);
+        noticia.id = next.id;
         this.callMensageSuccess(acao);
         noticia.excluida = !noticia.excluida;
       },

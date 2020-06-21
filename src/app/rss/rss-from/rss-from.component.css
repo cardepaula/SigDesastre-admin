@@ -1,8 +1,22 @@
+.sumir {
+  visibility: hidden;
+}
+.base {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+}
 .conteudo {
   display: flex;
   justify-self: flex-start;
   margin: 1 auto;
 }
-.sumir {
-  visibility: hidden;
+.divNome {
+  max-width: 260px;
+}
+.divDrop {
+  margin-left: 50px;
+  align-content: flex-start;
 }

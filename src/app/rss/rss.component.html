@@ -57,7 +57,10 @@
   </div>
 </div> -->
 <!-- Modal Structure -->
-<p-dialog [(visible)]="displayModal">
+<p-dialog
+  [(visible)]="displayModal"
+  [style]="{ width: '28vw', height: '28vw' }"
+>
   <p-header>
     Criar um novo RSS
   </p-header>

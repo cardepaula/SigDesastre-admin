@@ -25,6 +25,6 @@ export class NoticiaService {
     return this.http.delete(`${this.url}/id/${noticia.id}`);
   }
   postNoticias(noticia: Noticia) {
-    return this.http.post(`${this.url}`, noticia, this.httpOptions);
+    return this.http.post<Noticia>(`${this.url}`, noticia, this.httpOptions);
   }
 }

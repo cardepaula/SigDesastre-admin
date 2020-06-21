@@ -13,9 +13,11 @@ import { RssModule } from './rss/rss.module';
 import { NoticiaModule } from './noticia/noticia.module';
 import { RssComponent } from './rss/rss.component';
 import { DialogModule } from 'primeng/dialog';
+import { DropdownModule } from 'primeng/dropdown';
 @NgModule({
   declarations: [AppComponent, NoticiaComponent, RssComponent],
   imports: [
+    DropdownModule,
     DialogModule,
     NoticiaModule,
     RssModule,

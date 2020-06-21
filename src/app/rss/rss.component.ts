@@ -40,6 +40,7 @@ export class RssComponent implements OnInit {
     this.rssService.postRss(rss).subscribe(
       (next) => {
         console.log(next);
+        rss.id = next.id;
         this.callMensageSuccess(acao);
         rss.excluido = !rss.excluido;
       },
