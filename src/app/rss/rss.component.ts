@@ -23,15 +23,15 @@ export class RssComponent implements OnInit {
     this.displayModal = true;
   }
 
-  loadData() {
-    this.rssService.getRss().subscribe((n) => {
+  loadData(e) {
+    this.rssService.getRss(e.rows, e.first).subscribe((n) => {
       console.log(n);
 
-      this.rss = n.map((r) => {
+      this.rss = n.data.map((r) => {
         r.excluido = false;
         return r;
       });
-      this.totalRecords = n.length;
+      this.totalRecords = n.total;
     });
   }
   desfazer(rss: Rss) {
@@ -81,6 +81,15 @@ export class RssComponent implements OnInit {
 
   reload() {
     this.displayModal = false;
-    this.loadData();
+
+    this.rssService.getRss(10, 0).subscribe((n) => {
+      console.log(n);
+
+      this.rss = n.data.map((r) => {
+        r.excluido = false;
+        return r;
+      });
+      this.totalRecords = n.data.length;
+    });
   }
 }
