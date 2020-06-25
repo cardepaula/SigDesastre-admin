@@ -1,5 +1,11 @@
 import { Component, NgModule, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  FormControl,
+  NgControl,
+} from '@angular/forms';
 import { RssService } from '../service/rss.service';
 import { Rss } from '../models/rss.model';
 import { DropdownModule } from 'primeng/dropdown';
@@ -13,8 +19,8 @@ import { MessageService } from 'primeng/api';
 })
 export class RssFromComponent implements OnInit {
   rss = new Rss();
-  tipoFontelist = [{ label: '', value: {} }];
-  tipoFonteEscolhido: { nome: ''; id: 0 };
+  tipoFontelist = [];
+
   lockVar = true;
   constructor(
     private formBuilder: FormBuilder,
@@ -36,15 +42,20 @@ export class RssFromComponent implements OnInit {
       }
     );
   }
-  formRss: FormGroup = this.formBuilder.group(this.rss);
+  // formRss: FormGroup = this.formBuilder.group(this.rss);
 
+  formRss = new FormGroup({
+    nome: new FormControl('', Validators.minLength(1)),
+    url: new FormControl('', Validators.minLength(1)),
+    tipoFonteId: new FormControl('', [Validators.required]),
+  });
   async onSubmit() {
     if (!this.validador()) {
       this.lockVar = false;
       let rss: Rss = new Rss();
       rss.nome = this.formRss.value.nome;
       rss.url = this.formRss.value.url;
-      rss.tipoFonteId = this.tipoFonteEscolhido.id;
+      rss.tipoFonteId = this.formRss.value.tipoFonteId.id;
       console.log(rss);
 
       this.rssService.postRss(rss).subscribe(
@@ -67,7 +78,7 @@ export class RssFromComponent implements OnInit {
     return !(
       this.formRss.value.nome.length >= 1 &&
       this.formRss.value.url.length >= 1 &&
-      this.tipoFonteEscolhido.id &&
+      this.formRss.value.tipoFonteId &&
       this.lockVar
     );
   }

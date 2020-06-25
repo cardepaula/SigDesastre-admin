@@ -8,8 +8,8 @@
           minlength="1"
           type="text"
           class="form-control validate"
-          NgModule
           name="name"
+          placeholder="A gazeta"
           formControlName="nome"
         />
         <span
@@ -24,8 +24,7 @@
         <div>
           <p-dropdown
             [options]="tipoFontelist"
-            [(ngModel)]="tipoFonteEscolhido"
-            NgModule
+            placeholder="Tipo de Fonte"
             formControlName="tipoFonteId"
             name="tipoFonteId"
             class="form-control validate"
@@ -40,7 +39,7 @@
         required
         minlength="1"
         type="text"
-        NgModule
+        placeholder="www.agazeta.com.br/rss"
         class="form-control validate"
         name="url"
         formControlName="url"
