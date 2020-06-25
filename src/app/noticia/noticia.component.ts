@@ -24,6 +24,10 @@ export class NoticiaComponent implements OnInit {
     'tragédia',
     'samarco',
     'rio doce',
+    'rompimento',
+    'Dam',
+    'doce river',
+    'disaster',
   ];
   constructor(
     private service: NoticiaService,

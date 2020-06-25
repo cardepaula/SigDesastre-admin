@@ -12,6 +12,7 @@
   </div>
   <p-toast></p-toast>
   <p-dataView
+    styleClass="fundo"
     [value]="noticias"
     [paginator]="true"
     [rows]="20"
@@ -23,13 +24,15 @@
     <ng-template let-noticia pTemplate="gridItem">
       <div class="base ui-g-12 ui-md-3">
         <div [className]="confereNoticia(noticia) ? 'valido' : 'invalido'">
-          ID: {{ noticia.id }} - TITULO: {{ noticia.titulo }}
+          {{ noticia.titulo }}
         </div>
         <div>
-          FONTE: <a href="{{ noticia.fonte.link }}">{{ noticia.fonte.nome }}</a>
+          <a href="{{ noticia.fonte.link }}"> {{ noticia.fonte.nome }} </a>
         </div>
-        <div class="link">
-          LINK: <a href="{{ noticia.link }}">{{ noticia.link }}</a>
+        <div>
+          <a class="link" href="{{ noticia.link }}">
+            {{ noticia.link }}
+          </a>
         </div>
         <div class="mybadge" *ngIf="noticia.descValid">
           <span
@@ -40,13 +43,11 @@
           >
         </div>
 
-        <!-- <div class="conteudo">CONTEUDO: {{ noticia.conteudo }}</div> -->
         <div *ngIf="!noticia.excluida" (click)="excluir(noticia)" class="botao">
-          <a class="waves-effect waves-light btn red">excluir</a>
+          <a class="waves-effect waves-light btn corbtn">excluir</a>
         </div>
-
         <div *ngIf="noticia.excluida" (click)="desfazer(noticia)" class="botao">
-          <a class="waves-effect waves-light btn green">desfazer</a>
+          <a class="waves-effect waves-light btn corbtn">desfazer</a>
         </div>
       </div>
     </ng-template>

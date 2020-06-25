@@ -1,0 +1,50 @@
+.nave {
+  background-color: #3b6978;
+}
+:host ::ng-deep .ui-dataview-header,
+:host ::ng-deep .ui-paginator-bottom,
+:host ::ng-deep .ui-dataview-content {
+  border: 1px #84a9ac !important;
+  background-color: #3b6978 !important;
+}
+:host ::ng-deep .ui-state-active {
+  background-color: #84a9ac !important;
+}
+:host ::ng-deep .ui-paginator-icon {
+  color: #e7dfd5 !important;
+}
+:host ::ng-deep a:link,
+:host ::ng-deep a:visited,
+:host ::ng-deep a:active {
+  color: #e7dfd5;
+  text-decoration: underline;
+}
+:host ::ng-deep a:hover {
+  color: #c7bfb5;
+  text-decoration: underline;
+}
+:host ::ng-deep h4 {
+  color: #c7bfb5;
+}
+:host ::ng-deep .corbtn {
+  margin: 10px;
+  color: #204051;
+  background-color: #84a9ac;
+}
+:host ::ng-deep .base {
+  width: 100%;
+  margin: 1px auto;
+  display: flex;
+  flex-direction: column;
+  color: #e7dfd5 !important;
+  border: 1px #e7dfd5 !important;
+  background-color: #204051 !important;
+}
+:host ::ng-deep .btn-floating {
+  color: #204051 !important;
+  background-color: #84a9ac !important;
+}
+:host ::ng-deep .btn-floating i {
+  color: #204051 !important;
+  background-color: #84a9ac !important;
+}

@@ -25,17 +25,17 @@
   >
     <ng-template let-rss pTemplate="gridItem">
       <div class="base ui-g-12 ui-md-3">
-        <div>ID: {{ rss.id }} - TITULO: {{ rss.nome }}</div>
+        <div>{{ rss.nome }}</div>
         <div>
-          Link: <a href="{{ rss.url }}">{{ rss.url }}</a>
+          <a href="{{ rss.url }}">{{ rss.url }}</a>
         </div>
-
+        <br />
         <div *ngIf="!rss.excluido" (click)="excluir(rss)" class="botao">
-          <a class="waves-effect waves-light btn-small red">excluir</a>
+          <a class="waves-effect waves-light btn-small corbtn">excluir</a>
         </div>
 
         <div *ngIf="rss.excluido" (click)="desfazer(rss)" class="botao">
-          <a class="waves-effect waves-light btn-small green">desfazer</a>
+          <a class="waves-effect waves-light btn-small corbtn">desfazer</a>
         </div>
       </div>
     </ng-template>
